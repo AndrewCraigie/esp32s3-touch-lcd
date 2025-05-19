@@ -16,6 +16,21 @@ void setup()
     printf("Free heap at boot: %d bytes \r\n", ESP.getFreeHeap());
     printf("Free PSRAM at boot: %d bytes \r\n", ESP.getFreePsram());
 
+    printf("\r\n--- Device Diagnostics ---\r\n");
+    printf("Chip model: %s\r\n", ESP.getChipModel());
+    printf("Chip revision: %d\r\n", ESP.getChipRevision());
+    printf("Chip has %d core(s)\r\n", ESP.getChipCores());
+    printf("Flash size: %lu bytes\r\n", ESP.getFlashChipSize());
+    printf("Sketch size: %lu bytes\r\n", ESP.getSketchSize());
+    printf("Free sketch space: %lu bytes\r\n", ESP.getFreeSketchSpace());
+    printf("Heap: free=%u bytes, min=%u bytes, largest block=%u bytes\r\n",
+       ESP.getFreeHeap(), ESP.getMinFreeHeap(), ESP.getMaxAllocHeap());
+    printf("PSRAM: free=%u bytes, min=%u bytes, largest block=%u bytes\r\n",
+       ESP.getFreePsram(), ESP.getMinFreePsram(), ESP.getMaxAllocPsram());
+    printf("EFuse MAC address: 0x%012llX\r\n", ESP.getEfuseMac());
+    printf("--------------------------\r\n");
+
+
     // Initialize PSRAM
     if (psramInit()) {
         printf("PSRAM is correctly initialized \r\n");

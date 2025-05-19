@@ -26,3 +26,22 @@
 | Upload Speed                        | 921600                                      |
 | USB Mode                            | Hardware CDC and JTAG                       |
 | Zigbee Mode                         | Disabled                                    |
+
+### Device Diagnostics
+
+| Property                | Value                  |
+|-------------------------|------------------------|
+| Chip model              | ESP32-S3               |
+| Chip revision           | 1                      |
+| CPU cores               | 2                      |
+| Flash size              | 16,777,216 bytes (16MB)|
+| Sketch size             | 366,272 bytes          |
+| Free sketch space       | 3,145,728 bytes        |
+| Heap (free)             | 347,948 bytes          |
+| Heap (min)              | 343,496 bytes          |
+| Heap (largest block)    | 278,516 bytes          |
+| PSRAM (free)            | 2,095,104 bytes        |
+| PSRAM (min)             | 2,095,104 bytes        |
+| PSRAM (largest block)   | 2,064,372 bytes        |
+| EFuse MAC address       | `0x844CF0A1DF7C`       |
+
