@@ -8,35 +8,37 @@ CST816S touch(6, 7, 13, 5); // sda, scl, rst, irq
 
 void setup()
 {
-    Serial.begin(115200);
+
+    delay(1000);  // Allow time for USB CDC to initialize
+    printf("Serial initialized.\r\n");
 
     // Check memory at boot
-    Serial.printf("Free heap at boot: %d bytes\n", ESP.getFreeHeap());
-    Serial.printf("Free PSRAM at boot: %d bytes\n", ESP.getFreePsram());
+    printf("Free heap at boot: %d bytes \r\n", ESP.getFreeHeap());
+    printf("Free PSRAM at boot: %d bytes \r\n", ESP.getFreePsram());
 
     // Initialize PSRAM
     if (psramInit()) {
-        Serial.println("PSRAM is correctly initialized");
+        printf("PSRAM is correctly initialized \r\n");
     } else {
-        Serial.println("PSRAM not available");
+        printf("PSRAM not available \r\n");
     }
 
     // DMA-safe framebuffer allocation
     BlackImage = (UWORD *)heap_caps_malloc(Imagesize, MALLOC_CAP_DMA);
     if (BlackImage == NULL) {
-        Serial.println("Failed to allocate BlackImage (DMA safe)");
+        printf("Failed to allocate BlackImage (DMA safe) \r\n");
         exit(0);
     } else {
-        Serial.printf("BlackImage buffer allocated at %p (size: %d)\n", BlackImage, Imagesize);
+        printf("BlackImage buffer allocated at %p (size: %d) \r\n", BlackImage, Imagesize);
     }
 
     touch.begin();
 
     // Initialize hardware
     if (DEV_Module_Init() != 0) {
-        Serial.println("GPIO Init Fail!");
+        printf("GPIO Init Fail! \r\n");
     } else {
-        Serial.println("GPIO Init successful!");
+        printf("GPIO Init successful! \r\n");
     }
 
     LCD_1IN28_Init(HORIZONTAL);
@@ -48,7 +50,7 @@ void setup()
     Paint_SetRotate(ROTATE_0);
     Paint_Clear(WHITE);
 
-    Serial.println("drawing...\r\n");
+    printf("drawing...\r\n");
 
     // Basic color sequence
     delay(2000);
@@ -95,7 +97,7 @@ void setup()
     uint16_t result;
 
     QMI8658_init();
-    Serial.println("QMI8658_init done");
+    printf("QMI8658_init done \r\n");
 
     const float conversion_factor = 3.3f / (1 << 12) * 3;
     Paint_Clear(WHITE);
@@ -137,7 +139,7 @@ void setup()
 
         if (touch.available()) {
             if (touch.data.y < 45) {
-                Serial.println("Touch detected near top edge. Exiting sensor loop.");
+                printf("Touch detected near top edge. Exiting sensor loop. \r\n");
                 break;
             }
         }
